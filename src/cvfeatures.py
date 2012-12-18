@@ -63,9 +63,9 @@ def cv_features(argv):
 		else:
 			if print_msg:
 				print "  skipped item %s" % item
-
-	fo.write("]\n}")
-	fo.close()
+	if fo :
+		fo.write("]\n}")
+		fo.close()
 	# out-of-loop, done 
 	if print_msg:
 		tt = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
