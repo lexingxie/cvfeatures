@@ -32,7 +32,10 @@ def cv_features(argv):
 
 			outstr = json.dumps(cur_json, indent=4)
 			if fo :
-				fo.write( outstr + ",\n")
+				if cnt == 1: # first entry
+					fo.write( outstr )	
+				else:
+					fo.write( ",\n" + outstr ) # first append an array separator
 			else:
 				cur_out_file = os.path.join(args.out_dir, 
 					os.path.splitext(os.path.basename(item))[0]+".json" )
@@ -50,8 +53,8 @@ def cv_features(argv):
 						cnt += success
 
 					if success and args.verbose >= 1:
-						print_msg = True if print_msg or (args.verbose==2 and cnt>0 and cnt%100 ==0) else False
-						print_msg = True if print_msg or (args.verbose==1 and cnt>0 and cnt%1000==0) else False
+						print_msg = True if print_msg or (args.verbose==2 and cnt%100 ==0) else False
+						print_msg = True if print_msg or (args.verbose==1 and cnt%1000==0) else False
 
 						if print_msg:
 							tt = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
@@ -60,7 +63,7 @@ def cv_features(argv):
 						outstr = json.dumps(cur_json, indent=4)
 						# assemble output, write json
 						if fo :
-							if cnt == 0: # first entry
+							if cnt == 1: # first entry
 								fo.write( outstr )	
 							else:
 								fo.write( ",\n" + outstr ) # first append an array separator
@@ -70,7 +73,7 @@ def cv_features(argv):
 							open(cur_out_file, "w").write(outstr)
 					elif args.verbose >= 1:
 						print "unsuccessful with file %s" % cur_file
-						
+
 					if success and args.verbose == 3:
 						print outstr
 		else:
