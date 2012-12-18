@@ -49,12 +49,12 @@ def cv_features(argv):
 						cnt += success
 
 					if success and args.verbose >= 1:
-						print_msg = True if print_msg or (args.verbose==2 and cnt%100 ==0) else False
-						print_msg = True if print_msg or (args.verbose==1 and cnt%1000==0) else False
+						print_msg = True if print_msg or (args.verbose==2 and cnt>0 and cnt%100 ==0) else False
+						print_msg = True if print_msg or (args.verbose==1 and cnt>0 and cnt%1000==0) else False
 
 						if print_msg:
 							tt = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
-							print "%s %d files processed, the last one %s " (tt, cnt, cur_file)
+							print "%s %d files processed, the last one %s " % (tt, cnt, cur_file)
 
 					outstr = json.dumps(cur_json, indent=4)
 					if fo :
@@ -72,7 +72,7 @@ def cv_features(argv):
 	if fo :
 		fo.write("]\n}")
 		fo.close()
-		print "%s last output file %s " % (tt, cur_out_file)
+		if print_msg:	print "%s last output file %s " % (tt, cur_out_file)
 	
 	# out-of-loop, done 
 	if print_msg:
