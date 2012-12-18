@@ -71,7 +71,8 @@ def cv_features(argv):
 			if print_msg:
 				print "  skipped item %s" % item
 	if fo :
-		fo.write('\n ]\n')  # end of array for img jsons
+		fo.write('\b\b')  # remove the last array separator, this is fragile, is there a better way?
+		fo.write('\n]\n')  # end of array for img jsons
 		fo.close()
 		if print_msg:	print "%s last output file %s " % (tt, cur_out_file)
 	
