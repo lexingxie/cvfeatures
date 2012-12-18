@@ -7,7 +7,9 @@ output json of various features
 
 TODOs
 =====
-concatenating the json output 
+TODO 2012-12-18 decide on which set of features to extract (Lexing and Prithvi)
+TODO 2012-12-18 concatenating the json output has error right now 
+TODO 2012-12-18 a number of command options does not work right now (zipped output, custom file names)
 
 =====
 test.sh -- test script, also see here for example use
