@@ -16,7 +16,8 @@ def cv_features(argv):
 	if args.assemble_output:
 		cur_out_file = os.path.join(args.out_dir, args.out_file_name)
 		fo = open(cur_out_file, "w")
-		fo.write('{"images": [\n')
+		#fo.write('{"images": [\n')
+		fo.write('[\n')  # beginning of array of img jsons
 	else:
 		fo = None
 
@@ -58,7 +59,7 @@ def cv_features(argv):
 
 					outstr = json.dumps(cur_json, indent=4)
 					if fo :
-						fo.write( outstr + ",\n")
+						fo.write( outstr + ",\n") # array separator
 					else:
 						cur_out_file = os.path.join(args.out_dir, 
 							os.path.splitext(os.path.basename(item))[0]+".json" )
@@ -70,7 +71,7 @@ def cv_features(argv):
 			if print_msg:
 				print "  skipped item %s" % item
 	if fo :
-		fo.write("]\n}")
+		fo.write('\n ]\n')  # end of array for img jsons
 		fo.close()
 		if print_msg:	print "%s last output file %s " % (tt, cur_out_file)
 	
