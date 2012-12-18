@@ -57,17 +57,20 @@ def cv_features(argv):
 							tt = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
 							print "%s %d files processed, the last one %s " % (tt, cnt, cur_file)
 
-					outstr = json.dumps(cur_json, indent=4)
-					if fo :
-						if cnt == 0: # first entry
-							fo.write( outstr )	
+						outstr = json.dumps(cur_json, indent=4)
+						# assemble output, write json
+						if fo :
+							if cnt == 0: # first entry
+								fo.write( outstr )	
+							else:
+								fo.write( ",\n" + outstr ) # first append an array separator
 						else:
-							fo.write( ",\n" + outstr ) # first append an array separator
-					else:
-						cur_out_file = os.path.join(args.out_dir, 
-							os.path.splitext(os.path.basename(item))[0]+".json" )
-						open(cur_out_file, "w").write(outstr)
-					# assemble output, write json
+							cur_out_file = os.path.join(args.out_dir, 
+								os.path.splitext(os.path.basename(item))[0]+".json" )
+							open(cur_out_file, "w").write(outstr)
+					elif args.verbose >= 1:
+						print "unsuccessful with file %s" % cur_file
+						
 					if success and args.verbose == 3:
 						print outstr
 		else:
