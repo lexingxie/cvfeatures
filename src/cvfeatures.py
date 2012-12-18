@@ -14,7 +14,8 @@ def cv_features(argv):
 	print_msg = True if args.verbose==3 else False
 
 	if args.assemble_output:
-		fo = open(os.path.join(args.out_dir, args.out_file_name), "w")
+		cur_out_file = os.path.join(args.out_dir, args.out_file_name)
+		fo = open(cur_out_file, "w")
 		fo.write('{"images": [\n')
 	else:
 		fo = None
@@ -32,8 +33,9 @@ def cv_features(argv):
 			if fo :
 				fo.write( outstr + ",\n")
 			else:
-				open(os.path.join( args.out_dir, 
-					os.path.splitext(os.path.basename(item))[0]+".json" ), "w").write(outstr)
+				cur_out_file = os.path.join(args.out_dir, 
+					os.path.splitext(os.path.basename(item))[0]+".json" )
+				open(cur_out_file, "w").write(outstr)
 
 			if success and args.verbose == 3:
 				print outstr
@@ -57,6 +59,10 @@ def cv_features(argv):
 					outstr = json.dumps(cur_json, indent=4)
 					if fo :
 						fo.write( outstr + ",\n")
+					else:
+						cur_out_file = os.path.join(args.out_dir, 
+							os.path.splitext(os.path.basename(item))[0]+".json" )
+						open(cur_out_file, "w").write(outstr)
 					# assemble output, write json
 					if success and args.verbose == 3:
 						print outstr
@@ -66,6 +72,7 @@ def cv_features(argv):
 	if fo :
 		fo.write("]\n}")
 		fo.close()
+		print "%s %d files processed, Done " % (tt, cnt)
 	# out-of-loop, done 
 	if print_msg:
 		tt = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
