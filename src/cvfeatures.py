@@ -38,7 +38,7 @@ def cv_features(argv):
 					fo.write( ",\n" + outstr ) # first append an array separator
 			else:
 				cur_out_file = os.path.join(args.out_dir, 
-					os.path.splitext(os.path.basename(item))[0]+".json" )
+					os.path.splitext(os.path.basename(cur_file))[0]+".json" )
 				open(cur_out_file, "w").write(outstr)
 
 			if success and args.verbose == 3:
@@ -68,8 +68,9 @@ def cv_features(argv):
 							else:
 								fo.write( ",\n" + outstr ) # first append an array separator
 						else:
+							# TOFIX: this should be relative+recursive to root 
 							cur_out_file = os.path.join(args.out_dir, 
-								os.path.splitext(os.path.basename(item))[0]+".json" )
+								os.path.splitext(os.path.basename(cur_file))[0]+".json" )
 							open(cur_out_file, "w").write(outstr)
 					elif args.verbose >= 1:
 						print "unsuccessful with file %s" % cur_file
