@@ -59,7 +59,10 @@ def cv_features(argv):
 
 					outstr = json.dumps(cur_json, indent=4)
 					if fo :
-						fo.write( outstr + ",\n") # array separator
+						if cnt == 0: # first entry
+							fo.write( outstr )	
+						else:
+							fo.write( ",\n" + outstr ) # first append an array separator
 					else:
 						cur_out_file = os.path.join(args.out_dir, 
 							os.path.splitext(os.path.basename(item))[0]+".json" )
@@ -71,7 +74,6 @@ def cv_features(argv):
 			if print_msg:
 				print "  skipped item %s" % item
 	if fo :
-		fo.write('\b\b')  # remove the last array separator, this is fragile, is there a better way?
 		fo.write('\n]\n')  # end of array for img jsons
 		fo.close()
 		if print_msg:	print "%s last output file %s " % (tt, cur_out_file)
