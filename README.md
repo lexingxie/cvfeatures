@@ -10,6 +10,7 @@ output json of various features
 TODOs
 =====
 * TODO 2012-12-18 decide on which set of features to extract (Lexing and Prithvi)
+* TODO 2012-12-18 write an json feature reader to check the output (prithvi)
 * TODO 2012-12-18 concatenating the json output has error right now 
 * TODO 2012-12-18 a number of command options does not work right now (zipped output, etc)
 

@@ -72,7 +72,8 @@ def cv_features(argv):
 	if fo :
 		fo.write("]\n}")
 		fo.close()
-		print "%s %d files processed, Done " % (tt, cnt)
+		print "%s last output file %s " % (tt, cur_out_file)
+	
 	# out-of-loop, done 
 	if print_msg:
 		tt = datetime.strftime(datetime.now(), '%Y-%m-%d %H:%M:%S')
