@@ -1,8 +1,15 @@
 
+#============================================================================================
+#				Preamble
+#============================================================================================
+
 #from optparse import OptionParser
 import os
-
 from argparse import ArgumentParser
+
+#============================================================================================
+#				Parser
+#============================================================================================
 
 def parse_input(argv):
 	if len(argv)<2:
@@ -15,7 +22,7 @@ def parse_input(argv):
 	    default=0, help='save json for each input file, or [assmeble all into one]')
 	
 	parser.add_argument('-f', '--feature_list', dest='feature_list', 
-		default="gray_histogram16,average_rgb", help='list of feature names to extract')
+		default="gray_histogram16, average_rgb, sift_points, color_metric, region_of_interest", help='list of feature names to extract')
 	parser.add_argument('-p', '--pre_processing', dest='pre_processing', 
 		default=None, help='list of (global) pre-processing operations')
 	parser.add_argument('-v', '--verbose', dest='verbose', type=int,
